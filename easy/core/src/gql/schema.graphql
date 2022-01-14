@@ -1,0 +1,18 @@
+extend type Mutation {
+  "Upload a file that is publicly available."
+  upload(file: Upload!): String @field(resolver: "Easy\\Core\\GraphQL\\Mutations\\Upload")
+}
+
+extend type Query {
+    users: [User!]! @paginate(defaultCount: 10)
+    user(id: ID @eq): User @find
+    currentUser: User @auth
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}

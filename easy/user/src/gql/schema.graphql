@@ -1,13 +1,40 @@
-extend type Mutation {
-  "Upload a file that is publicly available."
-  upload(file: Upload!): String @field(resolver: "Easy\\Core\\GraphQL\\Mutations\\Upload")
+extend type Mutation{
+    "Log in to a new session and get the user."
+    userLogin(input: userLoginInputs! @spread): User!
+    @field(resolver: "Easy\\User\\GraphQL\\Mutations\\Login")
+    "Log out from the current session, showing the user one last time."
+    userLogout: User @guard(with: ["sanctum"])
+    @field(resolver: "Easy\\User\\GraphQL\\Mutations\\Logout")
+    "Create and login new user."
+    userRegistration(input: userRegistrationInputs! @spread): User! @field(resolver: "Easy\\User\\GraphQL\\Mutations\\Register")
 }
 
 extend type Query {
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
-    currentUser: User @auth
+    currentUser: User @guard(with: ["sanctum"]) @auth
 }
+
+input userLoginInputs {
+    "user email"
+    email: String! @rules(apply: ["required", "string", "email"])
+    "user password"
+    password: String! @rules(apply: ["required", "string", "min:8"])
+    "Remember me"
+    remember: Boolean @rules(apply: ["nullable", "bool"])
+}
+
+input userRegistrationInputs {
+    "user email"
+    name: String! @rules(apply: ["required", "string"])
+    "user email"
+    email: String! @rules(apply: ["required", "string", "email"])
+    "user password"
+    password: String! @rules(apply: ["required", "string", "min:8"])
+    "Confirm password"
+    confirm_password: String! @rules(apply: ["required", "string", "min:8"])
+}
+
 
 type User {
     id: ID!

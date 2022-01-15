@@ -18,7 +18,6 @@ class Upload
     public function __invoke($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo): string
     {
 //        $file = $args['file'];
-
         return (string) $context->request()->ip();
     }
 }

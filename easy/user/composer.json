@@ -1,7 +1,7 @@
 {
-    "name": "easy/core",
-    "description": "GraphQl API for ecommerce",
-    "keywords": ["GraphQl", "API", "ecommerce"],
+    "name": "easy/user",
+    "description": "GraphQl API for ecommerce admin user",
+    "keywords": ["GraphQl", "API", "ecommerce", "admin", "user"],
     "license": "MIT",
     "authors": [
         {
@@ -18,13 +18,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Easy\\Core\\": "src/"
+            "Easy\\User\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Easy\\Core\\CoreServiceProvider"
+                "Easy\\User\\UserServiceProvider"
             ]
         }
     },

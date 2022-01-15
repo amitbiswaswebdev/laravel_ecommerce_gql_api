@@ -20,6 +20,7 @@ class CoreServiceProvider extends EasyServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/config/cors.php', 'cors');
         $this->mergeConfigFileFrom(__DIR__ . '/config/graphql-playground.php', 'graphql-playground');
         $this->mergeConfigFileFrom(__DIR__ . '/config/lighthouse.php', 'lighthouse');
+        $this->registerPreferences();
     }
 
     /**
@@ -27,7 +28,6 @@ class CoreServiceProvider extends EasyServiceProvider
      */
     public function boot()
     {
-        $this->registerPreferences();
         if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
             $this->registerCommands();
             $this->configurePublishing();

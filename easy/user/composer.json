@@ -1,0 +1,33 @@
+{
+    "name": "easy/core",
+    "description": "GraphQl API for ecommerce",
+    "keywords": ["GraphQl", "API", "ecommerce"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amit Biswas",
+            "email": "amit.biswas.webdev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2|^8.0",
+        "ext-json": "*",
+        "illuminate/contracts": "^6.9|^7.0|^8.0|^9.0",
+        "illuminate/database": "^6.9|^7.0|^8.0|^9.0",
+        "illuminate/support": "^6.9|^7.0|^8.0|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Easy\\Core\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Easy\\Core\\CoreServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

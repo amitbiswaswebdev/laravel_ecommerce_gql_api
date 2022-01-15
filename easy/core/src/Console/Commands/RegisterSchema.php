@@ -4,6 +4,9 @@ namespace Easy\Core\Console\Commands;
 
 use Illuminate\Console\Command;
 
+/**
+ * @RegisterSchema
+ */
 class RegisterSchema extends Command
 {
     /**
@@ -34,7 +37,7 @@ class RegisterSchema extends Command
      */
     public function addSchemaToGQL(string $path)
     {
-        $prepend = '#import ../package/easy/' . $path . "\n";
+        $prepend = '#import ../package/' . $path . "\n";
         $file = base_path('graphql/schema.graphql');
         $fileContents = file_get_contents($file);
         file_put_contents($file, $prepend . $fileContents);

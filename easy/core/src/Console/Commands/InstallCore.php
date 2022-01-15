@@ -7,6 +7,9 @@ use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\Artisan;
 
+/**
+ * @InstallCore
+ */
 class InstallCore extends Command
 {
     /**
@@ -84,7 +87,7 @@ class InstallCore extends Command
         $schema = config('schema');
         if (is_array($schema) && sizeof($schema)) {
             foreach ($schema as $key => $data) {
-                $prepend = $prepend . '#import ../package/easy/' . $data['module'] . '/graphql/' . $data['path'] . "\n";
+                $prepend = $prepend . '#import ../package/' . $data['module'] . '/graphql/' . $data['path'] . "\n";
             }
         }
         $file = base_path('graphql/schema.graphql');

@@ -43,7 +43,11 @@ class CoreServiceProvider extends EasyServiceProvider
             $replace = config('preference');
             if (is_array($replace) && sizeof($replace)) {
                 foreach ($replace as $key => $data) {
-                    $this->app->singleton($data['source'], $data['destination']);
+                    if ($data['is_singleton']) {
+                        $this->app->singleton($data['source'], $data['destination']);
+                    } else {
+                        $this->app->bind($data['source'], $data['destination']);
+                    }
                 }
             }
         }

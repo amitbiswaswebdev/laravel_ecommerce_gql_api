@@ -5,5 +5,6 @@ return [
     //     'source' => '',
     //     'destination' => '',
     //     'remove' => false
+    //     'is_singleton' => true
     // ]
 ];

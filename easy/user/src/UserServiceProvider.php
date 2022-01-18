@@ -19,4 +19,14 @@ class UserServiceProvider extends EasyServiceProvider
         $this->mergeConfigFileFrom(__DIR__ . '/config/schema.php', 'schema', true);
         $this->mergeConfigFileFrom(__DIR__ . '/config/preference.php', 'preference', true);
     }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
 }

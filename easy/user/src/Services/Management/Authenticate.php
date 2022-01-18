@@ -111,7 +111,6 @@ class Authenticate implements AuthenticateInterface
         return Auth::guard($guard)->user();
     }
 
-
     /**
      * @param string $guard
      * @param Request $request

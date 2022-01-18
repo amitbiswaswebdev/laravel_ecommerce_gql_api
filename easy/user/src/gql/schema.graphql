@@ -1,10 +1,8 @@
 extend type Mutation{
     "Log in to a new session and get the user."
-    userLogin(input: userLoginInputs! @spread): User!
-    @field(resolver: "Easy\\User\\GraphQL\\Mutations\\Login")
+    userLogin(input: userLoginInputs! @spread): User! @field(resolver: "Easy\\User\\GraphQL\\Mutations\\Login")
     "Log out from the current session, showing the user one last time."
-    userLogout: User @guard(with: ["sanctum"])
-    @field(resolver: "Easy\\User\\GraphQL\\Mutations\\Logout")
+    userLogout: User @guard(with: ["sanctum"]) @field(resolver: "Easy\\User\\GraphQL\\Mutations\\Logout")
     "Create and login new user."
     userRegistration(input: userRegistrationInputs! @spread): User! @field(resolver: "Easy\\User\\GraphQL\\Mutations\\Register")
 }
@@ -34,7 +32,6 @@ input userRegistrationInputs {
     "Confirm password"
     confirm_password: String! @rules(apply: ["required", "string", "min:8"])
 }
-
 
 type User {
     id: ID!

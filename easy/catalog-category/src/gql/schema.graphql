@@ -1,0 +1,63 @@
+extend type Query {
+    category(id: ID! @eq): Category @guard(with: ["sanctum"]) @field(resolver: "Easy\\Category\\GraphQL\\Queries\\Show")
+    categories(input: CategoryListInputs! @spread): [Category!]! @guard(with: ["sanctum"]) @paginate(maxCount: 500 defaultCount: 10 builder: "Easy\\Category\\GraphQL\\Queries\\Index")
+}
+
+extend type Mutation {
+    "Create New Category"
+    createCategory(input: CategoryInputs! @spread): Category! @guard(with: ["sanctum"])
+    @field(resolver: "Easy\\Category\\GraphQL\\Mutations\\Create")
+    "Update Category"
+    updateCategory(input: UpdateCategoryInputs! @spread): Category! @guard(with: ["sanctum"])
+    @field(resolver: "Easy\\Category\\GraphQL\\Mutations\\Update")
+    "Delete Category"
+    deleteCategory(id: ID): Boolean @guard(with: ["sanctum"])
+    @field(resolver: "Easy\\Category\\GraphQL\\Mutations\\Delete")
+}
+
+type Category {
+    id: ID!
+    status: Boolean
+    title: String
+    unique_name: String
+    parent_id: Int
+    sort_order: Int
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input CategoryListInputs {
+    "Items per page"
+    perPage: Int! @rules(apply: ["required", "integer"])
+    "Current page number"
+    pageNumber: Int! @rules(apply: ["required", "integer"])
+    "List filters"
+    filters: [CategoryFilterInputs!]!
+}
+
+input CategoryFilterInputs {
+    "column to be filter"
+    column: String! @rules(apply: ["required", "string"])
+    "Condition"
+    condition: String! @rules(apply: ["required", "string"])
+    "value"
+    value: String! @rules(apply: ["required", "string"])
+}
+
+input CategoryInputs {
+    "status"
+    status: Boolean! @rules(apply: ["required", "boolean"])
+    "title"
+    title: String! @rules(apply: ["required", "string", "min:3"])
+    "Unique Name"
+    unique_name: String! @rules(apply: ["required", "string", "min:3"])
+    "Parent Id"
+    parent_id: Int! @rules(apply: ["nullable", "integer"])
+    "Sort Order"
+    sort_order: Int! @rules(apply: ["nullable", "integer"])
+}
+
+input UpdateCategoryInputs {
+    id: Int! @rules(apply: ["required", "integer"])
+    category: CategoryInputs!
+}
